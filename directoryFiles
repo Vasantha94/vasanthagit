@@ -1,6 +1,15 @@
-Script with details:
+Task:
 
+ 1. Start by checking if the directory exists. If not, print an error message and exit.
+ 2. Use a while loop to iterate through each file in the directory.
+ 3. Inside the loop, use an if statement to check if the current item is a file or a directory.
+ 4. If it’s a file, use a case statement to determine its file type (e.g., text file, image, script).
+ 5. For text files, print the first three lines. For images, display a message about its format. For script files, check if they are executable and print whether they are or not.
+ 6. If it’s a directory, print a message indicating that and recursively process the contents of that directory.
+ 7. Implement an elif statement to handle cases where the item is neither a file nor a directory and print an appropriate message.
+ 8. Use a counter to keep track of the number of files processed and print the total count at the end.
 
+Script with above details:
 
 !/bin/bash
 
