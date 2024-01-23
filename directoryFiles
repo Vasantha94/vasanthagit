@@ -1,0 +1,65 @@
+Script with details:
+
+
+
+!/bin/bash
+
+#1  Check if the directory exists
+
+directory="/home/vasantha/saanvi"
+
+if [ ! -d "$directory" ]; then
+    echo "Error: Directory does not exist."
+    exit 1
+fi
+
+# Initialize counter
+file_count=0
+
+#2 Iterate through each file in the directory using a while loop
+while IFS= read -r item; do
+    #3 Check if the current item is a file or directory
+    if [ -f "$directory/$item" ]; then
+        #4 If it's a file, use case statement to determine its type
+        case "$item" in
+            *.txt)
+                echo "Text file: $item"
+				#5.1 For text files, print the first three lines 
+                head -n 3 "$directory/$item"
+                ;;
+				#5.2 For images, display a message about its format
+            *.jpeg)
+                echo "Image file: $item"
+                ;;
+            *.sh)
+                echo "Script file: $item"
+                #5.3 For script files, check if they are executable and print whether they are or not
+                if [ -x "$directory/$item" ]; then
+                    echo "$item is executable."
+                else
+                    echo "$item is not executable."
+                fi
+                ;;
+            *)
+                echo "Unknown file type: $item"
+                ;;
+        esac
+    elif [ -d "$directory/$item" ]; then
+        #6 If it's a directory, recursively process its contents
+        echo "Directory: $item"
+        ./your_script_name.sh "$directory/$item"
+    else
+        #7 Handle cases where the item is neither a file nor a directory
+        echo "Unknown item: $item"
+    fi
+
+    #8.1 Increment file count
+    ((file_count++))
+done < <(ls "$directory")
+
+#8.2 Print the total count at the end
+echo "Total files processed: $file_count"
+
+
+
+          
